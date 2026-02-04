@@ -1,7 +1,7 @@
 import cv2
 import time
 
-cap = cv2.VideoCapture("/dev/video0", cv2.CAP_V4L2)
+cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -19,12 +19,15 @@ while True:
     fps = 1.0 / (now - prev_time)
     prev_time = now
 
-    cv2.putText(frame, f"FPS: {fps:.1f}",
-                (20, 40),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                1,
-                (0, 255, 0),
-                2)
+    cv2.putText(
+        frame,
+        f"FPS: {fps:.1f}",
+        (20, 40),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        1,
+        (0, 255, 0),
+        2
+    )
 
     cv2.imshow("cam", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -32,4 +35,3 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
